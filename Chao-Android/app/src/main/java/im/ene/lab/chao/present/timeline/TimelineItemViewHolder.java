@@ -18,14 +18,12 @@ package im.ene.lab.chao.present.timeline;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import com.bumptech.glide.Glide;
-import com.google.android.flexbox.FlexboxLayout;
 import im.ene.lab.chao.R;
 import im.ene.lab.chao.base.recyclerview.ViewHolder;
 import im.ene.lab.chao.data.entity.Article;
@@ -47,7 +45,8 @@ public class TimelineItemViewHolder extends ViewHolder {
   @BindView(R.id.item_text_translated) TextView itemTranslated;
   @BindView(R.id.translation_language_flag) ImageView translationFlag;
 
-  @BindView(R.id.translation_others) FlexboxLayout otherTranslations;
+  @BindView(R.id.more_flag) ImageView moreFlag;
+  @BindView(R.id.more_content) TextView moreContent;
   @BindView(R.id.positive_count) TextView positiveCount;
 
   private final CircleTransform circleTransform;
@@ -92,16 +91,11 @@ public class TimelineItemViewHolder extends ViewHolder {
         .transform(circleTransform)
         .into(translationFlag);
 
-    otherTranslations.removeAllViews();
-    for (int i = 0; i < 4; i++) {
-      ImageView flagView = (ImageView) LayoutInflater.from(otherTranslations.getContext())
-          .inflate(R.layout.widget_addition_flag, otherTranslations, false);
-      Glide.with(context)
-          .load("http://www.onlinestores.com/flagdetective/images/download/vietnam-hi.jpg")
-          .transform(circleTransform)
-          .into(flagView);
-      otherTranslations.addView(flagView);
-    }
+    Glide.with(context)
+        .load("http://www.onlinestores.com/flagdetective/images/download/vietnam-hi.jpg")
+        .transform(circleTransform)
+        .into(moreFlag);
+    moreContent.setText("その他240翻訳");
 
     positiveCount.setText("256");
   }

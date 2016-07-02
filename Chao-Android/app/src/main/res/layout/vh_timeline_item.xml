@@ -148,7 +148,7 @@
         />
 
     <!-- Bottom bar -->
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -159,7 +159,8 @@
           android:id="@+id/interactions"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="center_vertical"
+          android:layout_alignParentStart="true"
+          android:layout_centerVertical="true"
           android:orientation="horizontal"
           android:padding="4dp"
           >
@@ -194,21 +195,15 @@
             />
       </LinearLayout>
 
-      <com.google.android.flexbox.FlexboxLayout
-          android:id="@+id/translation_others"
-          android:layout_width="0dp"
+      <include
+          layout="@layout/widget_more_translations"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="?attr/selectableItemBackground"
-          android:clickable="true"
-          android:focusable="true"
-          android:padding="8dp"
-          app:alignItems="flex_start"
-          app:flexDirection="row"
-          app:flexWrap="wrap"
-          app:justifyContent="flex_end"
+          android:layout_alignParentEnd="true"
+          android:layout_centerVertical="true"
+          android:layout_margin="8dp"
           />
-    </LinearLayout>
+    </RelativeLayout>
 
   </LinearLayout>
 
