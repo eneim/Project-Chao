@@ -9,26 +9,20 @@ var translate = gcloud.translate({
     key: 'AIzaSyBkl1DAD3S1iCMfjbeWqlTtUIn5Jxk0le4'
 });
 
-var options = {
-    from: 'vi',
-    to: 'ja'
-};
-
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    translate.translate("Tôi muốn đến Tokyo", options, function (error, result) {
-        res.json({
-            input: "Tôi muốn đến Tokyo",
-            result: result
-        });
-    });
-    // res.send('respond with a resource');
+    res.send('Respond with a resource');
 });
 
 router.route('/translate').post(function (req, res) {
     var input = [
         req.body.text
     ];
+
+    var options = {
+        from: req.body.from,
+        to: req.body.to
+    };
 
     translate.translate(input, options, function (error, results, response) {
         res.json(response)
