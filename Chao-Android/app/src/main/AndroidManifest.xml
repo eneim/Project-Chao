@@ -3,13 +3,13 @@
     package="im.ene.lab.chao">
 
   <application
-      android:allowBackup="true"
+      android:name=".Chao"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity
-        android:name=".MainActivity"
+        android:name=".present.MainActivity"
         android:label="@string/app_name"
         android:theme="@style/AppTheme.NoActionBar">
       <intent-filter>
