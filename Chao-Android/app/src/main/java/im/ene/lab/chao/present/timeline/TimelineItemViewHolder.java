@@ -48,6 +48,7 @@ public class TimelineItemViewHolder extends ViewHolder {
   @BindView(R.id.translation_language_flag) ImageView translationFlag;
 
   @BindView(R.id.translation_others) FlexboxLayout otherTranslations;
+  @BindView(R.id.positive_count) TextView positiveCount;
 
   private final CircleTransform circleTransform;
   private Article article;
@@ -101,5 +102,7 @@ public class TimelineItemViewHolder extends ViewHolder {
           .into(flagView);
       otherTranslations.addView(flagView);
     }
+
+    positiveCount.setText("256");
   }
 }
