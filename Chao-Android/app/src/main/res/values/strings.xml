@@ -17,4 +17,14 @@
 <resources>
   <string name="app_name">Chao-Android</string>
   <string name="action_settings">Settings</string>
+
+  <string name="dummy">
+    GitHub Wikis is a simple way to let others contribute content. Any GitHub user can create and
+    edit pages to use for documentation, examples, support, or anything you wish.
+  </string>
+
+  <string name="dummy_translated">
+    GitHubのWikiのは、他の人がコンテンツを提供させるための簡単な方法です。任意のGitHubのユーザーが作成できると
+    エディット・ページは、ドキュメント、例、サポート、またはあなたが望むもののために使用します。
+  </string>
 </resources>

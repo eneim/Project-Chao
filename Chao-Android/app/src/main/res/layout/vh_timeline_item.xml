@@ -20,8 +20,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
     app:cardCornerRadius="0dp"
-    app:cardElevation="1dp"
+    app:cardElevation="2dp"
     >
 
   <LinearLayout
@@ -33,20 +34,10 @@
     <FrameLayout
         android:id="@+id/user_container"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="16dp"
         >
-
-      <android.support.v7.widget.AppCompatImageButton
-          android:id="@+id/item_author_avatar"
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          android:layout_gravity="top|center_vertical"
-          android:background="?attr/selectableItemBackgroundBorderless"
-          android:cropToPadding="true"
-          android:scaleType="fitCenter"
-          android:src="@drawable/placeholder_circle"
-          />
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -63,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             tools:text="Nam Nguyen"
             />
 
@@ -76,8 +67,98 @@
             />
 
       </LinearLayout>
+
+      <android.support.v7.widget.AppCompatImageButton
+          android:id="@+id/user_avatar"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_gravity="top|center_vertical"
+          android:background="?attr/selectableItemBackgroundBorderless"
+          android:cropToPadding="true"
+          android:scaleType="fitCenter"
+          android:src="@drawable/placeholder_circle"
+          />
     </FrameLayout>
 
+    <android.support.design.internal.ForegroundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:paddingBottom="8dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingTop="4dp"
+        >
+
+      <TextView
+          android:id="@+id/item_text"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="top"
+          android:layout_weight="1"
+          android:lineSpacingMultiplier="1.3"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+          tools:text="@string/dummy"
+          />
+
+      <ImageView
+          android:id="@+id/item_language_flag"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_gravity="top"
+          android:layout_margin="4dp"
+          />
+
+    </android.support.design.internal.ForegroundLinearLayout>
+
+    <android.support.design.internal.ForegroundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="12dp"
+        >
+
+      <ImageView
+          android:id="@+id/translation_language_flag"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:layout_gravity="top"
+          android:layout_margin="4dp"
+          />
+
+      <TextView
+          android:id="@+id/item_text_translated"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:lineSpacingMultiplier="1.3"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+          android:textDirection="rtl"
+          tools:text="@string/dummy_translated"
+          />
+    </android.support.design.internal.ForegroundLinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@android:color/white"
+        />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/translation_others"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:paddingTop="8dp"
+        app:alignItems="flex_end"
+        app:flexDirection="row"
+        app:flexWrap="wrap"
+        />
   </LinearLayout>
 
 </android.support.v7.widget.CardView>

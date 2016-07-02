@@ -16,20 +16,90 @@
 
 package im.ene.lab.chao.present.timeline;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.BindView;
+import com.bumptech.glide.Glide;
+import com.google.android.flexbox.FlexboxLayout;
+import im.ene.lab.chao.R;
 import im.ene.lab.chao.base.recyclerview.ViewHolder;
+import im.ene.lab.chao.data.entity.Article;
+import im.ene.lab.chao.util.CircleTransform;
 
 /**
  * Created by eneim on 7/2/16.
  */
 public class TimelineItemViewHolder extends ViewHolder {
 
+  static final int LAYOUT_RES = R.layout.vh_timeline_item;
+
+  @BindView(R.id.user_avatar) ImageButton userAvatar;
+  @BindView(R.id.user_name) TextView userName;
+  @BindView(R.id.user_language) TextView userLanguage;
+
+  @BindView(R.id.item_text) TextView itemText;
+  @BindView(R.id.item_language_flag) ImageView itemLangFlag;
+  @BindView(R.id.item_text_translated) TextView itemTranslated;
+  @BindView(R.id.translation_language_flag) ImageView translationFlag;
+
+  @BindView(R.id.translation_others) FlexboxLayout otherTranslations;
+
+  private final CircleTransform circleTransform;
+  private Article article;
+
   public TimelineItemViewHolder(View itemView) {
     super(itemView);
+    circleTransform = new CircleTransform(itemView.getContext());
   }
 
   @Override public <T extends RecyclerView.Adapter> void bind(T parent, Object item) {
+    if (!(item instanceof Article)) {
+      throw new IllegalArgumentException("Not support");
+    }
 
+    article = (Article) item;
+
+    Glide.with(context)
+        .load("http://www.onlinestores.com/flagdetective/images/download/vietnam-hi.jpg")
+        .placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
+        .error(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
+        .transform(circleTransform)
+        .into(userAvatar);
+
+    userName.setText(R.string.app_name);
+    userLanguage.setText("Vietnamese");
+
+    itemText.setText(R.string.dummy);
+    itemTranslated.setText(R.string.dummy_translated);
+
+    Glide.with(context)
+        .load("http://www.onlinestores.com/flagdetective/images/download/vietnam-hi.jpg")
+        .placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
+        .error(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
+        .transform(circleTransform)
+        .into(itemLangFlag);
+
+    Glide.with(context)
+        .load("http://www.onlinestores.com/flagdetective/images/download/vietnam-hi.jpg")
+        .placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
+        .error(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
+        .transform(circleTransform)
+        .into(translationFlag);
+
+    otherTranslations.removeAllViews();
+    for (int i = 0; i < 4; i++) {
+      ImageView flagView = (ImageView) LayoutInflater.from(otherTranslations.getContext())
+          .inflate(R.layout.widget_addition_flag, otherTranslations, false);
+      Glide.with(context)
+          .load("http://www.onlinestores.com/flagdetective/images/download/vietnam-hi.jpg")
+          .transform(circleTransform)
+          .into(flagView);
+      otherTranslations.addView(flagView);
+    }
   }
 }

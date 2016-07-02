@@ -11,15 +11,25 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
     <activity
-        android:label="@string/app_name"
+        android:name=".present.timeline.TimelineActivity"
+        android:theme="@style/AppTheme"
+        />
+
+    <activity
         android:name=".present.MainActivity"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme"
+        />
+
+    <activity-alias
+        android:label="@string/app_name"
+        android:name="Launcher"
+        android:targetActivity=".present.timeline.TimelineActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
+    </activity-alias>
   </application>
 
 </manifest>

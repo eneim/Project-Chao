@@ -16,16 +16,22 @@
 
 package im.ene.lab.chao.base.recyclerview;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import butterknife.ButterKnife;
 
 /**
  * Created by eneim on 7/2/16.
  */
 public abstract class ViewHolder extends RecyclerView.ViewHolder {
 
+  protected final Context context;
+
   public ViewHolder(View itemView) {
     super(itemView);
+    context = itemView.getContext();
+    ButterKnife.bind(this, itemView);
   }
 
   public abstract <T extends RecyclerView.Adapter> void bind(T parent, Object item);

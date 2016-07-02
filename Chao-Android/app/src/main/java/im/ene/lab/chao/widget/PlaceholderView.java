@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-package im.ene.lab.chao.present.timeline;
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+package im.ene.lab.chao.widget;
 
 /**
  * Created by eneim on 7/2/16.
  */
-public class TimelineActivity extends AppCompatActivity {
-
-  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(android.R.id.content, TimelineFragment.newInstance())
-          .commit();
-    }
-  }
+public class PlaceholderView {
 }

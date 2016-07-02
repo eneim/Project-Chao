@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
-package im.ene.lab.chao.present.timeline;
+package im.ene.lab.chao.data.entity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import com.google.gson.annotations.Expose;
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by eneim on 7/2/16.
  */
-public class TimelineActivity extends AppCompatActivity {
+public class Article extends RealmObject {
 
-  @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(android.R.id.content, TimelineFragment.newInstance())
-          .commit();
-    }
-  }
+  @PrimaryKey @Expose public String id;
+
+  @Expose public Sentence source;
+
+  @Expose public RealmList<Sentence> translations;
 }

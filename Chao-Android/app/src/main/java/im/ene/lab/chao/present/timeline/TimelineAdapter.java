@@ -16,8 +16,11 @@
 
 package im.ene.lab.chao.present.timeline;
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import im.ene.lab.chao.base.recyclerview.Adapter;
+import im.ene.lab.chao.data.entity.Article;
 
 /**
  * Created by eneim on 7/2/16.
@@ -25,14 +28,16 @@ import im.ene.lab.chao.base.recyclerview.Adapter;
 public class TimelineAdapter extends Adapter<TimelineItemViewHolder> {
 
   @Override public Object getItem(int position) {
-    return null;
+    return new Article();
   }
 
   @Override public TimelineItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return null;
+    View view = LayoutInflater.from(parent.getContext())
+        .inflate(TimelineItemViewHolder.LAYOUT_RES, parent, false);
+    return new TimelineItemViewHolder(view);
   }
 
   @Override public int getItemCount() {
-    return 0;
+    return 100;
   }
 }
