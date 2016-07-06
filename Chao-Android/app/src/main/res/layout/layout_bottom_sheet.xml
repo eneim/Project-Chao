@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2016 Nam Nguyen, nam@ene.im
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="224dp"
+    android:orientation="vertical"
+    tools:layout_height="224dp"
+    >
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        >
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center_vertical"
+          android:paddingBottom="4dp"
+          android:paddingEnd="12dp"
+          android:paddingStart="12dp"
+          android:paddingTop="4dp"
+          android:text="もっといい翻訳があるますか？"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+          />
+
+      <Button
+          android:id="@+id/button_cancel"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:text="いいえ"
+          style="?attr/buttonBarNegativeButtonStyle"
+          />
+
+      <Button
+          android:id="@+id/button_ok"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="OK"
+          style="?attr/buttonBarPositiveButtonStyle"
+          />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sentence_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f5f5f5"
+        android:lineSpacingMultiplier="1.3"
+        android:padding="12dp"
+        android:text="@string/dummy"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:minHeight="40dp"
+        android:padding="4dp"
+        android:text="今度は表示しない"
+        />
+  </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

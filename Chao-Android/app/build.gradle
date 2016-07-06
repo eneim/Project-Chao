@@ -1,0 +1,121 @@
+/*
+ * Copyright 2016 Nam Nguyen, nam@ene.im
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'realm-android'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+  compileSdkVersion 24
+  buildToolsVersion "24.0.0"
+  publishNonDefault true
+
+  defaultConfig {
+    applicationId "im.ene.lab.chao"
+    minSdkVersion 21
+    targetSdkVersion 24
+    versionCode 1
+    versionName "1.0"
+  }
+
+  signingConfigs {
+    release {
+      keyAlias "debug"
+      keyPassword "android"
+      storeFile file("debug.jks")
+      storePassword "android"
+    }
+
+    debug {
+      keyAlias "debug"
+      keyPassword "android"
+      storeFile file("debug.jks")
+      storePassword "android"
+    }
+  }
+
+  buildTypes {
+    release {
+      signingConfig signingConfigs.release
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+      buildConfigField("String", "BASE_URL", "\"http://47.88.195.187:3000\"")
+    }
+
+    debug {
+      signingConfig signingConfigs.release
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+      buildConfigField("String", "BASE_URL", "\"http://397b8705.ngrok.io/\"")
+    }
+  }
+
+  packagingOptions {
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
+}
+
+dependencies {
+  compile fileTree(dir: 'libs', include: ['*.jar'])
+  testCompile 'junit:junit:4.12'
+  compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+  compile "com.android.support:design:${supportLibraryVersion}"
+  compile "com.android.support:cardview-v7:${supportLibraryVersion}"
+  compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+
+  compile("com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit2Version}") {
+    exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+  }
+
+  compile "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit2Version}"
+  compile "com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.retrofit2Version}"
+  compile "com.squareup.okhttp3:okhttp:${rootProject.ext.okhttp3Version}"
+  compile "com.google.code.gson:gson:${rootProject.ext.gsonVersion}"
+
+  compile "io.reactivex:rxjava:${rootProject.ext.rxJavaVersion}"
+  compile "io.reactivex:rxandroid:${rootProject.ext.rxAndroidVersion}"
+
+  compile 'com.facebook.stetho:stetho:1.3.1'
+  compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+  compile 'com.uphyca:stetho_realm:0.9.0'
+
+  compile 'com.github.bumptech.glide:glide:3.7.0'
+  compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
+
+  compile 'com.google.android:flexbox:0.1.3'
+
+  compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+  compile 'com.jakewharton.threetenabp:threetenabp:1.0.3'
+
+  compile 'com.jakewharton:butterknife:8.0.1'
+  apt 'com.jakewharton:butterknife-compiler:8.0.1'
+
+  compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+  compile 'com.google.firebase:firebase-auth:9.2.0'
+
+  compile group: 'org.jsoup', name: 'jsoup', version: '1.9.2'
+  compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+}
+
+apply plugin: 'com.google.gms.google-services'

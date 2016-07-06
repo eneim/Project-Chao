@@ -1,0 +1,57 @@
+/*
+ * Copyright 2016 Nam Nguyen, nam@ene.im
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:2.1.2'
+
+    classpath 'com.google.gms:google-services:3.0.0'
+    classpath "io.realm:realm-gradle-plugin:1.1.0"
+    // NOTE: Do not place your application dependencies here; they belong
+    // in the individual module build.gradle files
+  }
+}
+
+allprojects {
+  repositories {
+    jcenter()
+    maven {
+      url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+    }
+    maven {
+      url 'http://dl.bintray.com/amulyakhare/maven'
+    }
+    mavenCentral()
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}
+
+ext {
+  supportLibraryVersion = '24.0.0'
+  retrofit2Version = '2.1.0'
+  okhttp3Version = '3.3.1'
+  gsonVersion = '2.6.2'
+  rxJavaVersion = '1.1.6'
+  rxAndroidVersion = '1.2.1'
+}

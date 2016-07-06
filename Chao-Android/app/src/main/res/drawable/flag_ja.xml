@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2016 Nam Nguyen, nam@ene.im
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="480dp"
+    android:viewportHeight="480"
+    android:viewportWidth="640"
+    android:width="640dp">
+
+  <path
+      android:fillColor="#fff"
+      android:name="rect149"
+      android:pathData="M-39.999,0 L680.001,0 L680.001,480 L-39.999,480 L-39.999,0 Z"
+      android:strokeWidth="1"/>
+  <path
+      android:fillColor="#d30000"
+      android:name="path194"
+      android:pathData="M320,90.7749 C402.415,90.7749,469.226,157.586,469.226,240.002
+C469.226,322.417,402.415,389.228,320,389.228
+C237.584,389.228,170.773,322.417,170.773,240.002
+C170.773,157.586,237.584,90.7749,320,90.7749 Z"
+      android:strokeWidth="1"/>
+</vector>
