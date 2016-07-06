@@ -39,6 +39,12 @@ public class Chao extends Application {
     return sInstance.getSharedPreferences("chao.project", Context.MODE_PRIVATE);
   }
 
+  public static String PREF_SHOW_REQUEST = "chao_pref_show_request";
+
+  public static boolean willShowRequest() {
+    return getPref().getBoolean(PREF_SHOW_REQUEST, true);
+  }
+
   @Override public void onCreate() {
     super.onCreate();
     sInstance = this;

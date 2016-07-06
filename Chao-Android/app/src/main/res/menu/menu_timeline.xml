@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright 2016 Nam Nguyen, nam@ene.im
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +15,12 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#8b9dc3"
-        android:clipToPadding="false"
-        android:paddingTop="72dp" />
-
-</FrameLayout>
+  <item
+      android:id="@+id/action_open_bookmark"
+      android:icon="@drawable/ic_keyboard_voice_black_24dp"
+      android:title="Voice Search"
+      app:showAsAction="ifRoom"/>
+</menu>

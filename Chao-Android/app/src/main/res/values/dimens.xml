@@ -21,4 +21,6 @@
   <dimen name="fab_margin">16dp</dimen>
 
   <dimen name="avatar_radius">20dp</dimen>
+
+  <dimen name="bottom_peak_height">400dp</dimen>
 </resources>

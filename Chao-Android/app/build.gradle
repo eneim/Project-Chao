@@ -116,6 +116,8 @@ dependencies {
 
   compile group: 'org.jsoup', name: 'jsoup', version: '1.9.2'
   compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
+  compile 'com.github.arimorty:floatingsearchview:2.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

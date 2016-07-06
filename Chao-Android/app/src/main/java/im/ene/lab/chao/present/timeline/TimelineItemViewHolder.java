@@ -84,12 +84,6 @@ public class TimelineItemViewHolder extends ViewHolder {
         .buildRoundRect(ownerName.substring(0, 1).toUpperCase(),
             ColorGenerator.MATERIAL.getColor(ownerName), avatarRadius);
 
-    //Glide.with(context)
-    //    .load(DataSource.getFlagResource(article.getSource().getCreator().getMotherTongue()))
-    //    .placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
-    //    .error(ContextCompat.getDrawable(context, R.drawable.placeholder_circle))
-    //    .transform(circleTransform)
-    //    .into(userAvatar);
     userAvatar.setImageDrawable(drawable);
 
     userName.setText(article.getSource().getCreator().getUserName());
@@ -153,5 +147,6 @@ public class TimelineItemViewHolder extends ViewHolder {
     super.setOnClickListener(listener);
     thumbDown.setOnClickListener(listener);
     thumbUp.setOnClickListener(listener);
+    moreTranslations.setOnClickListener(listener);
   }
 }

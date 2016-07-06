@@ -16,21 +16,38 @@
 
 package im.ene.lab.chao.present.timeline;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.ResultReceiver;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import im.ene.lab.chao.Chao;
 import im.ene.lab.chao.R;
 import im.ene.lab.chao.widget.RequestBottomSheetFragment;
+import im.ene.lab.chao.widget.SearchBottomSheetFragment;
+import java.lang.reflect.Method;
 
 /**
  * Created by eneim on 7/2/16.
  */
 public class TimelineActivity extends AppCompatActivity implements TimelineFragment.Callback {
 
-  View bottomSheet;
-  BottomSheetBehavior bottomSheetBehavior;
+  private static final String TAG = "TimelineActivity";
+
+  FloatingSearchView searchView;
+
+  static final String[] QUERIES = {
+      "Anh ơi cho tôi hỏi chút", "Tôi có thể hút thuốc ở đây không", "Đồn cảnh sát ở đâu",
+      "Tàu nào sẽ đến Nhà thi đấu Yoyogi"
+  };
 
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,12 +58,74 @@ public class TimelineActivity extends AppCompatActivity implements TimelineFragm
           .commit();
     }
 
-    //bottomSheet = findViewById(R.id.bottom_sheet);
-    //bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+    searchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
+    searchView.setOnLeftMenuClickListener(new FloatingSearchView.OnLeftMenuClickListener() {
+      @Override public void onMenuOpened() {
+
+      }
+
+      @Override public void onMenuClosed() {
+
+      }
+    });
+
+    searchView.setOnMenuItemClickListener(new FloatingSearchView.OnMenuItemClickListener() {
+      @Override public void onActionMenuItemSelected(MenuItem item) {
+        Log.d(TAG, "onActionMenuItemSelected() called with: " + "item = [" + item + "]");
+        if (item.getItemId() == R.id.action_search) {
+          searchView.clearQuery();
+          searchView.setSearchText(QUERIES[(int) (QUERIES.length * Math.random())]);
+        }
+      }
+    });
+
+    searchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
+      @Override public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+        Log.d(TAG, "onSuggestionClicked() called with: "
+            + "searchSuggestion = ["
+            + searchSuggestion
+            + "]");
+      }
+
+      @Override public void onSearchAction(String currentQuery) {
+        hideIme(searchView);
+        SearchBottomSheetFragment searchFragment =
+            SearchBottomSheetFragment.newInstance(currentQuery);
+        searchFragment.show(getSupportFragmentManager(), SearchBottomSheetFragment.TAG);
+      }
+    });
   }
 
-  @Override public void onThumbDownRequestBetterSuggestion() {
-    RequestBottomSheetFragment fragment = RequestBottomSheetFragment.newInstance();
-    fragment.show(getSupportFragmentManager(), RequestBottomSheetFragment.class.getSimpleName());
+  @Override public void onThumbDownRequestBetterSuggestion(String id) {
+    if (Chao.willShowRequest()) {
+      RequestBottomSheetFragment fragment = RequestBottomSheetFragment.newInstance(id);
+      fragment.show(getSupportFragmentManager(), RequestBottomSheetFragment.class.getSimpleName());
+    }
+  }
+
+  @Override public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return true;
+  }
+
+  public static void showIme(@NonNull View view) {
+    InputMethodManager imm =
+        (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+    // the public methods don't seem to work for me, so… reflection.
+    try {
+      Method showSoftInputUnchecked =
+          InputMethodManager.class.getMethod("showSoftInputUnchecked", int.class,
+              ResultReceiver.class);
+      showSoftInputUnchecked.setAccessible(true);
+      showSoftInputUnchecked.invoke(imm, 0, null);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void hideIme(@NonNull View view) {
+    InputMethodManager imm =
+        (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
   }
 }

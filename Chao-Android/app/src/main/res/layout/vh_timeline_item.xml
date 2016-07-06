@@ -28,6 +28,7 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:background="#f2f2f2"
       android:orientation="vertical"
       >
 
@@ -35,7 +36,7 @@
         android:id="@+id/user_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f0f2f7"
+        android:background="#ffffff"
         android:padding="16dp"
         >
 
@@ -99,7 +100,7 @@
           android:layout_gravity="top"
           android:layout_weight="1"
           android:lineSpacingMultiplier="1.3"
-          android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           tools:text="@string/dummy"
           />
 
@@ -145,7 +146,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:lineSpacingMultiplier="1.3"
-          android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+          android:textAppearance="@style/TextAppearance.AppCompat.Medium"
           android:textDirection="rtl"
           tools:text="@string/dummy_translated"
           />
@@ -161,7 +162,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#f7f7f7"
+        android:background="#ffffff"
         android:orientation="horizontal"
         android:padding="4dp"
         >
@@ -207,8 +208,8 @@
       </LinearLayout>
 
       <include
-          android:id="@+id/more_translations"
           layout="@layout/widget_more_translations"
+          android:id="@+id/more_translations"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_alignParentEnd="true"

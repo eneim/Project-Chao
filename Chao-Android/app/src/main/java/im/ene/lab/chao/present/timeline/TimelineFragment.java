@@ -17,6 +17,7 @@
 package im.ene.lab.chao.present.timeline;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,11 +28,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import butterknife.BindView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import im.ene.lab.chao.R;
 import im.ene.lab.chao.base.BaseFragment;
 import im.ene.lab.chao.base.recyclerview.MugenScrollListener;
 import im.ene.lab.chao.data.DataSource;
 import im.ene.lab.chao.data.model.Article;
+import im.ene.lab.chao.present.auth.AuthDialogFragment;
+import im.ene.lab.chao.present.more.MoreTranslationFragment;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import io.realm.Sort;
@@ -53,9 +58,14 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
   private boolean isLoading = false;
   private int page = 0;
 
+  private String sourceLang = "eng";
+  private String desLang = "jpn";
+
   private Callback callback;
 
   @BindView(R.id.recycler_view) RecyclerView recyclerView;
+
+  private FirebaseUser mUser;
 
   @Override public void onAttach(Context context) {
     super.onAttach(context);
@@ -81,9 +91,8 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
 
   @Override public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
-    articles = Realm.getDefaultInstance()
-        .where(Article.class)
-        .findAllSorted("textLength", Sort.DESCENDING);
+    articles =
+        Realm.getDefaultInstance().where(Article.class).findAllSorted("updatedAt", Sort.DESCENDING);
     adapter = new TimelineAdapter(articles);
 
     layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -96,7 +105,7 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
         page++;
         isLoading = true;
         adapter.setLoadingMore(true);
-        DataSource.search(null, "vie", "jpn", page)
+        DataSource.search(null, sourceLang, desLang, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(new Action1<List<Article>>() {
@@ -123,6 +132,11 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
 
     adapter.setOnItemClickListener(new TimelineAdapter.ItemClickHandler() {
       @Override public void thumbUpClicked(ImageButton button, final Article item) {
+        if (mUser == null) {
+          requestAuth();
+          return;
+        }
+
         Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
           @Override public void execute(Realm realm) {
             if (item.getEvaluation() == 1) {
@@ -139,6 +153,11 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
       }
 
       @Override public void thumbDownClicked(ImageButton button, final Article item) {
+        if (mUser == null) {
+          requestAuth();
+          return;
+        }
+
         Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
           @Override public void execute(Realm realm) {
             if (item.getEvaluation() == -1) {
@@ -149,13 +168,19 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
               item.evaluation = -1;
 
               if (callback != null) {
-                callback.onThumbDownRequestBetterSuggestion();
+                callback.onThumbDownRequestBetterSuggestion(item.getId());
               }
             }
 
             realm.copyToRealmOrUpdate(item);
           }
         });
+      }
+
+      @Override public void viewMoreTranslations(View view, Article item) {
+        MoreTranslationFragment fragment = MoreTranslationFragment.newInstance(item.getId());
+        fragment.setTargetFragment(TimelineFragment.this, 1000);
+        fragment.show(getChildFragmentManager(), MoreTranslationFragment.TAG);
       }
     });
   }
@@ -164,6 +189,8 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
 
   @Override public void onResume() {
     super.onResume();
+    mUser = FirebaseAuth.getInstance().getCurrentUser();
+
     updateSubscription = articles.asObservable().subscribe(new Action1<RealmResults<Article>>() {
       @Override public void call(RealmResults<Article> articles) {
         adapter.notifyDataSetChanged();
@@ -172,7 +199,8 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
 
     page = 1;
     isLoading = true;
-    DataSource.search(null, "vie", "jpn", page)
+
+    DataSource.search(null, sourceLang, desLang, page)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(new Action1<List<Article>>() {
@@ -208,6 +236,17 @@ public class TimelineFragment extends BaseFragment implements MugenScrollListene
 
   public interface Callback {
 
-    void onThumbDownRequestBetterSuggestion();
+    void onThumbDownRequestBetterSuggestion(String id);
+  }
+
+  private void requestAuth() {
+    AuthDialogFragment authFragment = AuthDialogFragment.newInstance();
+    authFragment.setTargetFragment(this, 1000);
+    authFragment.show(getChildFragmentManager(), AuthDialogFragment.TAG);
+  }
+
+  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    mUser = FirebaseAuth.getInstance().getCurrentUser();
   }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
   ~ Copyright 2016 Nam Nguyen, nam@ene.im
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +14,12 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#8b9dc3"
-        android:clipToPadding="false"
-        android:paddingTop="72dp" />
-
-</FrameLayout>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:height="32dp"
+    android:viewportHeight="56.693"
+    android:viewportWidth="56.693"
+    android:width="32dp">
+  <path
+      android:fillColor="#3b5988"
+      android:pathData="M40.43,21.74h-7.64v-5.01c0,-1.88 1.25,-2.32 2.13,-2.32c0.88,0 5.39,0 5.39,0V6.13l-7.43,-0.03c-8.25,0 -10.13,6.17 -10.13,10.13v5.52h-4.77v8.53h4.77c0,10.95 0,24.14 0,24.14h10.03c0,0 0,-13.32 0,-24.14h6.77L40.43,21.74z"/>
+</vector>

@@ -12,12 +12,20 @@
       android:name=".Chao"
       android:supportsRtl="true"
       android:theme="@style/AppTheme">
+
     <activity
         android:launchMode="singleTop"
         android:name=".present.timeline.TimelineActivity"
         android:screenOrientation="portrait"
-        android:theme="@style/AppTheme"
-        />
+        android:theme="@style/AppTheme.NoActionBar"
+        >
+      <intent-filter>
+        <action android:name="android.intent.action.SEARCH"/>
+      </intent-filter>
+      <meta-data
+          android:name="android.app.searchable"
+          android:resource="@xml/searchable"/>
+    </activity>
 
     <activity
         android:launchMode="singleTop"

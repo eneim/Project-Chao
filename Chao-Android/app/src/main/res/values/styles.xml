@@ -6,6 +6,7 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
   </style>
 
   <style name="AppTheme.NoActionBar">
@@ -17,4 +18,18 @@
 
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+  <style name="AppBottomSheetDialogTheme"
+      parent="Theme.Design.Light.BottomSheetDialog">
+    <item name="bottomSheetStyle">@style/AppModalStyle</item>
+  </style>
+
+  <style name="AppModalStyle"
+      parent="Widget.Design.BottomSheet.Modal">
+    <item name="behavior_peekHeight">400dp</item>
+  </style>
+
+  <style name="Chao.Dialog.Fullscreen" parent="Theme.AppCompat.Light.DialogWhenLarge">
+    <item name="android:windowAnimationStyle">@style/Animation.Design.BottomSheetDialog</item>
+  </style>
+  
 </resources>

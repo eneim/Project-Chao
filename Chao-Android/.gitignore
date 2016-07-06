@@ -15,4 +15,5 @@
 /.idea/modules.xml
 /.idea/vcs.xml
 /.idea/encodings.xml
+/.idea/findbugs-idea.xml
 /app/google-services.json

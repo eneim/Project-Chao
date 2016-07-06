@@ -46,7 +46,7 @@
           android:paddingEnd="12dp"
           android:paddingStart="12dp"
           android:paddingTop="4dp"
-          android:text="もっといい翻訳があるますか？"
+          android:text="もっといい翻訳がありますか？"
           android:textAppearance="@style/TextAppearance.AppCompat.Body2"
           />
 
@@ -80,6 +80,7 @@
         />
 
     <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/requester_checkbox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
@@ -88,7 +89,7 @@
         android:layout_marginTop="4dp"
         android:minHeight="40dp"
         android:padding="4dp"
-        android:text="今度は表示しない"
+        android:text="今度表示しない"
         />
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

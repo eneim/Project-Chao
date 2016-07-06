@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
+import java.util.Date;
 
 /**
  * Created by eneim on 7/2/16.
@@ -89,5 +90,7 @@ public class Article extends RealmObject {
     } else {
       evaluation = -1;
     }
+
+    updatedAt = Long.toString((new Date()).getTime());
   }
 }

@@ -18,10 +18,10 @@ package im.ene.lab.chao.present;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import im.ene.lab.chao.R;
 import im.ene.lab.chao.present.timeline.TimelineActivity;
 
 /**
@@ -29,15 +29,21 @@ import im.ene.lab.chao.present.timeline.TimelineActivity;
  */
 public class LaunchActivity extends AppCompatActivity {
 
+  Handler handler = new Handler();
+
   @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    if (user != null) {
-      startActivity(new Intent(this, TimelineActivity.class));
-    } else {
-      startActivity(new Intent(this, AuthActivity.class));
-    }
-    // startService(new Intent(this, TatoebaDataParserService.class));
-    finish();
+    setContentView(R.layout.activity_launch);
+    handler.postDelayed(new Runnable() {
+      @Override public void run() {
+        startActivity(new Intent(LaunchActivity.this, TimelineActivity.class));
+        finish();
+      }
+    }, 1000);
+  }
+
+  @Override protected void onPause() {
+    super.onPause();
+    handler.removeCallbacksAndMessages(null);
   }
 }

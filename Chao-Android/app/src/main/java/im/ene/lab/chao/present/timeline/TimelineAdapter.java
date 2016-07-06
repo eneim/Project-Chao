@@ -103,6 +103,8 @@ public class TimelineAdapter extends Adapter<ViewHolder> {
 
     public abstract void thumbDownClicked(ImageButton button, Article item);
 
+    public abstract void viewMoreTranslations(View view, Article item);
+
     @Override
     public void onItemClick(Adapter adapter, ViewHolder viewHolder, View view, int position,
         long id) {
@@ -116,6 +118,8 @@ public class TimelineAdapter extends Adapter<ViewHolder> {
         thumbUpClicked((ImageButton) view, item);
       } else if (view == holder.thumbDown) {
         thumbDownClicked((ImageButton) view, item);
+      } else if (view == holder.moreTranslations) {
+        viewMoreTranslations(view, item);
       }
     }
   }

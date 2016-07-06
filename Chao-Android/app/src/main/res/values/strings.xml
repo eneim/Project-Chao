@@ -28,5 +28,6 @@
     エディット・ページは、ドキュメント、例、サポート、またはあなたが望むもののために使用します。
   </string>
 
+  <string name="search_result">クエリ：%1$s\n\n検索結果：%2$s</string>
   <string name="facebook_app_id">296304347371247</string>
 </resources>
